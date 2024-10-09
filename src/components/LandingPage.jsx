@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
-  // State to track the current tab
   const [activeTab, setActiveTab] = useState('users');
+  const navigate = useNavigate();
 
-  // Function to render content based on the active tab
   const renderContent = () => {
     switch (activeTab) {
       case 'users':
@@ -44,7 +45,7 @@ const LandingPage = () => {
                 View All Photos
               </button>
               <button
-                onClick={() => setActiveTab('upload')}
+                onClick={() => navigate('/upload-photo')} 
                 className={`text-md font-medium px-3 py-2 ${
                   activeTab === 'upload' ? 'text-blue-500' : 'text-gray-800'
                 } hover:text-blue-500`}
@@ -57,20 +58,66 @@ const LandingPage = () => {
       </nav>
 
       <div className="container mx-auto mt-10">
-        {/* Render content based on activeTab */}
         {renderContent()}
       </div>
     </div>
   );
 };
 
-// Dummy components for each tab
-const ViewUsers = () => (
-  <div className="bg-white p-6 rounded-lg shadow-lg">
-    <h3 className="text-lg font-bold mb-2 text-gray-700">All Users</h3>
-    <p className="text-gray-600 mb-4">List of all users will be shown here.</p>
-  </div>
-);
+
+const ViewUsers = () => {
+    const [emails, setEmails] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      const fetchEmails = async () => {
+        try {
+          const response = await axios.get(
+            'https://9ltev5mdm1.execute-api.us-east-1.amazonaws.com/deployment/get-list-of-user'
+          );
+          
+          console.log('API Response:', response);
+  
+          if (response.status === 200 && response.data && response.data.emails) {
+            setEmails(response.data.emails);
+          } else {
+            setError('Unexpected response format or no emails found');
+          }
+        } catch (err) {
+          console.error('Error fetching emails:', err); 
+          setError('Failed to fetch emails. Please check the console for more details.');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchEmails();
+    }, []); 
+  
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
+  
+    return (
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h3 className="text-lg font-bold mb-2 text-gray-700">All Users</h3>
+        <table className="min-w-full bg-white">
+          <thead>
+            <tr>
+              <th className="py-2">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {emails.map((email, index) => (
+              <tr key={index} className="border-t">
+                <td className="py-2 px-4">{email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
 
 const ViewPhotos = () => (
   <div className="bg-white p-6 rounded-lg shadow-lg">
