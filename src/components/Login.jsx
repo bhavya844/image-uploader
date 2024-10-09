@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   // Simple email validation function
   const validateEmail = (email) => {
@@ -14,17 +16,17 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     if (!email || !password) {
       toast.error('Please fill in all fields.');
       return;
     }
-  
+
     if (!validateEmail(email)) {
       toast.error('Please enter a valid email.');
       return;
     }
-  
+
     try {
       const response = await axios.post(
         'https://bh9t3o0g76.execute-api.us-east-1.amazonaws.com/deployment/login', // Replace with your actual API Gateway endpoint for login
@@ -42,22 +44,25 @@ const Login = () => {
           },
         }
       );
-  
+
       // Now manually check the status codes
       if (response.status === 200) {
         toast.success(response.data.message);  // Login successful
+        // Redirect to the landing page after a successful login
+        navigate('/landing');
       } else if (response.status === 401 || response.status === 400) {
         toast.error(response.data.message);  // Incorrect credentials or user not found
       } else {
         toast.error('Unexpected response. Please try again.');
       }
-  
+
     } catch (error) {
       // Handle any network-related errors or issues like timeouts
       toast.error('A network error occurred during login. Please try again.');
       console.log('Error during login:', error);
     }
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
       <div className="bg-white shadow-xl rounded-lg p-8 md:w-1/3 w-full">
