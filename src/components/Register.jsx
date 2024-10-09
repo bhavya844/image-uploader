@@ -27,13 +27,10 @@ const Register = () => {
           }
         }
       );
-      // console.log(response);
   
       // Check if the status is 2xx (successful)
       if (response.status === 200) {
-        const { statusCode, body } = response.data;
-  
-        toast.success("successfully registered");
+        toast.success("Successfully registered");
       } else {
         toast.error('Unexpected response from the server. Please try again.');
       }
