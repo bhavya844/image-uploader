@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const ViewAllPhotos = () => {
-    const [activeTab, setActiveTab] = useState('users');
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -77,7 +76,7 @@ const ViewAllPhotos = () => {
             <div key={index} className="bg-white p-4 rounded-lg shadow-lg">
               <img
                 src={photo.url}
-                alt={`Photo ${index + 1}`}
+                alt=""
                 className="w-full h-auto rounded"
               />
             </div>
