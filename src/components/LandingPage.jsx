@@ -37,7 +37,7 @@ const LandingPage = () => {
                 View All Users
               </button>
               <button
-                onClick={() => setActiveTab('photos')}
+            onClick={() => navigate('/view-all-photos')}
                 className={`text-md font-medium px-3 py-2 ${
                   activeTab === 'photos' ? 'text-blue-500' : 'text-gray-800'
                 } hover:text-blue-500`}
@@ -51,6 +51,14 @@ const LandingPage = () => {
                 } hover:text-blue-500`}
               >
                 Upload a Photo
+              </button>
+              <button
+                onClick={() => navigate('/')} 
+                className={`text-md font-medium px-3 py-2 ${
+                  activeTab === 'upload' ? 'text-blue-500' : 'text-gray-800'
+                } hover:text-blue-500`}
+              >
+                Signout
               </button>
             </div>
           </div>
