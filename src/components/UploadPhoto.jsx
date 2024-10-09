@@ -68,7 +68,7 @@ const UploadPhoto = () => {
             <div className="text-2xl font-bold text-gray-800">Photo App</div>
             <div className="flex space-x-4">
               <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/landing')}
                 className="text-md font-medium px-3 py-2 text-gray-800 hover:text-blue-500"
               >
                 View All Users
@@ -84,6 +84,12 @@ const UploadPhoto = () => {
                 disabled
               >
                 Upload a Photo
+              </button>
+              <button
+                onClick={() => navigate('/')}
+                className="text-md font-medium px-3 py-2 text-gray-800 hover:text-blue-500"
+              >
+                Signout
               </button>
             </div>
           </div>
