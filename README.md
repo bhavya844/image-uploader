@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Image Uploader Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based image uploader application that allows users to register, log in, and upload images. The application stores the uploaded images in Amazon S3 and retrieves them for viewing. 
 
-## Available Scripts
+## Deployed Application
 
-In the project directory, you can run:
+The application is live and can be accessed at: [Image Uploader](https://bhavyadave-image-uploader.netlify.app/)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User Registration and Login**: Users can register and log in with their email and password.
+- **Upload Photos**: Authenticated users can upload photos directly to Amazon S3.
+- **View Photos**: Users can view the photos they have uploaded, fetched from the S3 bucket.
+- **Responsive Design**: The application is built using Tailwind CSS for a fully responsive and attractive UI.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **React**: Frontend framework.
+- **React Router**: For client-side navigation.
+- **Tailwind CSS**: For responsive styling and layout.
+- **Axios**: For making API requests.
+- **Toastify**: For displaying success and error messages.
+- **AWS Lambda & API Gateway**: Backend to handle user registration, login, and image uploading.
+- **Amazon S3**: Cloud storage for uploaded images.
+- **Netlify**: Platform for continuous deployment and hosting.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Pages and Functionality
 
-### `npm run build`
+### 1. Home Page (Landing Page)
+- This is the main landing page where users can choose to:
+  - View All Users
+  - View All Photos
+  - Upload a Photo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Register Page
+- Users can register with their email and password.
+- Upon successful registration, they can log in to the application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Login Page
+- Users can log in using their registered email and password.
+- Upon successful login, users are redirected to the main page to access the app's features.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 4. Upload Photo
+- Authenticated users can upload a photo to the S3 bucket.
+- The photo is converted to Base64 format and uploaded via the backend API to S3.
+  
+### 5. View All Photos
+- Users can view all their uploaded photos on a separate page.
+- The photos are fetched from the S3 bucket and displayed in a responsive grid format.
 
-### `npm run eject`
+## How to Run Locally
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Clone the repository**:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```bash
+    git clone https://github.com/bhavya844/image-uploader.git
+    cd image-uploader
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Install dependencies**:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3. **Run the application**:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ```bash
+    npm start
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    The application will start on `http://localhost:3000`.
 
-### Code Splitting
+## Build and Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To create a production build, run:
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm run build
